@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  * @ORM\Entity(repositoryClass=SectorOrderSignRepository::class)
  * @ORM\HasLifecycleCallbacks()
  */
-class SectorOrderSign extends AbstractOrderSign
+class SectorOrderSign extends AbstractVariableOrderSign
 {
     private const TYPE = 'sector';
 

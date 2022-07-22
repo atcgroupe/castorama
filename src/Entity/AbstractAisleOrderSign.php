@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\MappedSuperclass
  */
-abstract class AbstractAisleOrderSign extends AbstractOrderSign
+abstract class AbstractAisleOrderSign extends AbstractVariableOrderSign
 {
     /**
      * @ORM\Column(type="smallint")

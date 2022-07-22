@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     message="Un panneau allée avec ce numéro et cet alignement existe déjà dans cette commande"
  * )
  */
-class MaterialSectorOrderSign extends AbstractOrderSign
+class MaterialSectorOrderSign extends AbstractVariableOrderSign
 {
     private const TYPE = 'materialSector';
 

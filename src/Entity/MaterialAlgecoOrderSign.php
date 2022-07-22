@@ -10,7 +10,7 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
 /**
  * @ORM\Entity(repositoryClass=MaterialAlgecoOrderSignRepository::class)
  */
-class MaterialAlgecoOrderSign extends AbstractOrderSign
+class MaterialAlgecoOrderSign extends AbstractVariableOrderSign
 {
     private const TYPE = 'materialAlgeco';
 

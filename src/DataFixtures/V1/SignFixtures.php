@@ -3,6 +3,7 @@
 namespace App\DataFixtures\V1;
 
 use App\DataFixtures\AbstractSignFixtures;
+use App\Entity\AbstractSign;
 use App\Entity\AisleOrderSign;
 use App\Entity\AisleSmallOrderSign;
 use App\Entity\SectorOrderSign;
@@ -29,7 +30,7 @@ class SignFixtures extends AbstractSignFixtures
                 self::TEMPLATE => 'AisleSignTemplate',
                 self::PRICE => 14.50,
                 self::CUSTOMER_REF => '178738',
-                self::CATEGORY => Sign::CATEGORY_INDOOR,
+                self::CATEGORY => AbstractSign::CATEGORY_INDOOR,
             ],
             [
                 self::ID => 2,
@@ -43,7 +44,7 @@ class SignFixtures extends AbstractSignFixtures
                 self::TEMPLATE => 'AisleSmallSignTemplate',
                 self::PRICE => 10.50,
                 self::CUSTOMER_REF => '178737',
-                self::CATEGORY => Sign::CATEGORY_INDOOR,
+                self::CATEGORY => AbstractSign::CATEGORY_INDOOR,
             ],
             [
                 self::ID => 3,
@@ -57,7 +58,7 @@ class SignFixtures extends AbstractSignFixtures
                 self::TEMPLATE => 'SectorSignTemplate',
                 self::PRICE => 39.00,
                 self::CUSTOMER_REF => '178736',
-                self::CATEGORY => Sign::CATEGORY_INDOOR,
+                self::CATEGORY => AbstractSign::CATEGORY_INDOOR,
             ],
         ];
     }

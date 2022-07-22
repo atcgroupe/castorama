@@ -3,6 +3,7 @@
 namespace App\DataFixtures\V2;
 
 use App\DataFixtures\AbstractSignFixtures;
+use App\Entity\AbstractSign;
 use App\Entity\MaterialAlgecoOrderSign;
 use App\Entity\MaterialDirOrderSign;
 use App\Entity\MaterialSectorOrderSign;
@@ -29,7 +30,7 @@ class SignFixtures extends AbstractSignFixtures
                 self::TEMPLATE => 'MaterialSectorSignTemplate',
                 self::PRICE => 40.00,
                 self::CUSTOMER_REF => 'xxxxxx',
-                self::CATEGORY => Sign::CATEGORY_OUTDOOR,
+                self::CATEGORY => AbstractSign::CATEGORY_OUTDOOR,
             ],
             [
                 self::ID => 5,
@@ -43,7 +44,7 @@ class SignFixtures extends AbstractSignFixtures
                 self::TEMPLATE => 'MaterialDirSignTemplate',
                 self::PRICE => 40.00,
                 self::CUSTOMER_REF => 'xxxxxx',
-                self::CATEGORY => Sign::CATEGORY_OUTDOOR,
+                self::CATEGORY => AbstractSign::CATEGORY_OUTDOOR,
             ],
             [
                 self::ID => 6,
@@ -57,7 +58,7 @@ class SignFixtures extends AbstractSignFixtures
                 self::TEMPLATE => 'MaterialAlgecoSignTemplate',
                 self::PRICE => 40.00,
                 self::CUSTOMER_REF => 'xxxxxx',
-                self::CATEGORY => Sign::CATEGORY_OUTDOOR,
+                self::CATEGORY => AbstractSign::CATEGORY_OUTDOOR,
             ],
         ];
     }

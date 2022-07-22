@@ -10,7 +10,7 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
 /**
  * @ORM\Entity(repositoryClass=MaterialDirOrderSignRepository::class)
  */
-class MaterialDirOrderSign extends AbstractOrderSign
+class MaterialDirOrderSign extends AbstractVariableOrderSign
 {
     private const TYPE = 'materialDir';
     public const TITLE_CAISSE = 'c';

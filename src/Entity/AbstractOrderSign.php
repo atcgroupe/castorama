@@ -38,12 +38,6 @@ abstract class AbstractOrderSign implements OrderSignInterface, OrderSignApiInte
     protected $order;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Sign::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    protected $sign;
-
-    /**
      * Used for API json data
      *
      * @var string
@@ -77,56 +71,6 @@ abstract class AbstractOrderSign implements OrderSignInterface, OrderSignApiInte
         $this->order = $order;
 
         return $this;
-    }
-
-    public function getSign(): ?Sign
-    {
-        return $this->sign;
-    }
-
-    public function setSign(?Sign $sign): self
-    {
-        $this->sign = $sign;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     *
-     * @Groups({"api_xml_object"})
-     */
-    public function getSwitchBuilder(): string
-    {
-        return $this->getSign()->getSwitchFlowBuilder();
-    }
-
-    /**
-     * @return string
-     *
-     * @Groups({"api_xml_object"})
-     */
-    public function getSwitchTemplate(): string
-    {
-        return $this->getSign()->getSwitchFlowTemplateFile();
-    }
-
-    /**
-     * @return string
-     *
-     * @Groups({"api_xml_object"})
-     */
-    public function getData(): string
-    {
-        return $this->data;
-    }
-
-    /**
-     * @param string $data
-     */
-    public function setData(string $data): void
-    {
-        $this->data = $data;
     }
 
     /**
