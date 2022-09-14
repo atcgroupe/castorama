@@ -1,0 +1,62 @@
+version: "3.8"
+
+services:
+  encore:
+    build:
+      context: .
+      dockerfile: "Dockerfile.encore"
+    volumes:
+      - type: volume
+        source: build
+        target: /app/public/build
+  mysql:
+    image: mysql:8.0.30
+    environment:
+      - MYSQL_ROOT_PASSWORD
+    volumes:
+      - type: volume
+        source: db-prod
+        target: /var/lib/mysql
+    restart: unless-stopped
+  fpm:
+    build:
+      context: .
+      dockerfile: "Dockerfile.fpm"
+    volumes:
+      - type: volume
+        source: build
+        target: /app/public/build
+      - type: volume
+        source: resource
+        target: /app/public/resource
+    restart: unless-stopped
+    depends_on:
+      - encore
+      - mysql
+  nginx:
+    build:
+      context: .
+      dockerfile: "Dockerfile.nginx"
+    volumes:
+      - type: volume
+        source: build
+        target: /app/public/build
+      - type: volume
+        source: resource
+        target: /app/public/resource
+      - type: bind
+        source: /etc/letsencrypt
+        target: /etc/letsencrypt
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: unless-stopped
+    depends_on:
+      - fpm
+
+volumes:
+  db-prod:
+    external: true
+  resource:
+    external: true
+  build:
