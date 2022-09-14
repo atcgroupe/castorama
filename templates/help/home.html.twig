@@ -1,0 +1,46 @@
+{% extends 'core/core.html.twig' %}
+
+{% block content %}
+    <h1 class="h2 text-primary text-center">Centre d'aide</h1>
+
+    <h2 class="h3 text-primary mt-4 ms-3">Commandes</h2>
+
+    <div class="list-group">
+        <a href="{{ path('help_order_new') }}" class="list-group-item list-group-item-action">
+            Comment créer une nouvelle commande ?
+        </a>
+
+        <a href="#" class="list-group-item list-group-item-action">Comment envoyer ma commande à l'imprimeur?</a>
+
+        <a href="#" class="list-group-item list-group-item-action">Comment savoir ou en est ma commande ?</a>
+
+        <a href="#" class="list-group-item list-group-item-action">Comment retrouver ma commande ?</a>
+
+        <a href="#" class="list-group-item list-group-item-action">Comment supprimer une commande ?</a>
+    </div>
+
+    <h2 class="h3 text-primary mt-4 ms-3">Les panneaux</h2>
+
+    <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action">Comment ajouter un panneau à ma commande ?</a>
+
+        <a href="#" class="list-group-item list-group-item-action">Comment modifier un panneau dans ma commande ?</a>
+
+        <a href="#" class="list-group-item list-group-item-action">Comment Modifier la quantité pour un panneau dans ma commande ?</a>
+
+        <a href="#" class="list-group-item list-group-item-action">Comment supprimer un panneau dans ma commande ?</a>
+    </div>
+
+    <h2 class="h3 text-primary mt-4 ms-3">Les membres & les alertes mails</h2>
+
+    <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action">Comment ajouter un nouveau membre ?</a>
+
+        <a href="#" class="list-group-item list-group-item-action">Comment modifier mes alertes email ?</a>
+
+        <a href="#" class="list-group-item list-group-item-action">Comment modifier mes informations ?</a>
+
+        <a href="#" class="list-group-item list-group-item-action">Comment supprimer un membre ?</a>
+    </div>
+
+{% endblock %}

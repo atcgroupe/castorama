@@ -1,0 +1,55 @@
+{% extends 'core/core.html.twig' %}
+
+{% block content %}
+    <div class="row justify-content-md-center">
+        <div class="col col-md-9">
+            <h1 class="h2 text-primary text-center fw-light">
+                Comment créer une nouvelle commande ?
+            </h1>
+
+            <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                </symbol>
+            </svg>
+
+            <div class="alert alert-info d-flex align-items-center mt-5" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+                    <use xlink:href="#info-fill"/>
+                </svg>
+
+                <div>
+                    <p class="mb-0">
+                        Sur la page d'accueil des commandes, cliquez sur le boutton <strong>Créer une saisie</strong>.
+                    </p>
+
+                    <p class="mb-0">
+                        Vous serez ensuite redirigés directement sur la page d'accueil de la nouvelle commande.
+                    </p>
+                </div>
+            </div>
+
+            <h2 class="h5 text-secondary fw-light mt-5 text-center">
+                Etape 1 : Click sur créer une saisie
+            </h2>
+
+            <p class="mt-4">
+                <img src="{{ asset('build/images/help/order/orderNew.webp') }}"
+                     width="816"
+                     class="shadow"
+                     alt="Nouvelle commande">
+            </p>
+
+            <h2 class="h5 text-secondary fw-light mt-5 text-center">
+                Etape 2 : Vous arrivez sur la page d'accueil de la nouvelle commande
+            </h2>
+
+            <p class="mt-4">
+                <img src="{{ asset('build/images/help/order/orderNew2.webp') }}"
+                     width="816"
+                     class="shadow"
+                     alt="Nouvelle commande">
+            </p>
+        </div>
+    </div>
+{% endblock %}
