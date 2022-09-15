@@ -58,3 +58,7 @@ services:
     App\Service\Sign\CustomSignFileManager:
       arguments:
           $projectDir: '%kernel.project_dir%'
+
+    App\Service\Order\OrderNotificationDispatcher:
+      arguments:
+        $emailNotifications: '%env(EMAIL_NOTIFICATIONS)%'

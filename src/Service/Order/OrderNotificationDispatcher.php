@@ -18,12 +18,16 @@ use Twig\Error\SyntaxError;
 
 class OrderNotificationDispatcher
 {
+    private const EMAIL_NOTIFICATIONS_ENABLED = 'enabled';
+    private const EMAIL_NOTIFICATIONS_DISABLED = 'disabled';
+
     public function __construct(
         private readonly OrderRepository $orderRepository,
         private readonly OrderSignResumeHelper $orderSignResumeHelper,
         private readonly MemberRepository $memberRepository,
         private readonly Environment $twig,
         private readonly MailerInterface $mailer,
+        private readonly string $emailNotifications,
     ) {
     }
 
@@ -37,6 +41,20 @@ class OrderNotificationDispatcher
      */
     public function send(int $orderId): void
     {
+        if (!in_array(
+            $this->emailNotifications, [self::EMAIL_NOTIFICATIONS_ENABLED, self::EMAIL_NOTIFICATIONS_DISABLED]
+        )) {
+            throw new \InvalidArgumentException(sprintf(
+                'Invalid env argument EMAIL_NOTIFICATIONS. Posible values are %s or %s',
+                self::EMAIL_NOTIFICATIONS_ENABLED,
+                self::EMAIL_NOTIFICATIONS_DISABLED
+            ));
+        }
+
+        if ($this->emailNotifications === self::EMAIL_NOTIFICATIONS_DISABLED) {
+            return;
+        }
+
         $order = $this->orderRepository->findOneWithRelations($orderId);
         $resume = $this->orderSignResumeHelper->getResume($order);
         $addresses = $this->getMembersAddresses($order->getStatus()->getEvent(), $order->getUser());
