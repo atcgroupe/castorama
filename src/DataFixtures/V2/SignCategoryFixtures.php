@@ -14,7 +14,7 @@ class SignCategoryFixtures extends Fixture implements FixtureGroupInterface
     {
         $data = [
             'c1' => 'Signalétique interieure',
-            'c2' => 'Cour des matériaux',
+            'c2' => 'Cour des matériaux et Jardinerie',
         ];
 
         foreach ($data as $key => $label) {

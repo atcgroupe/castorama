@@ -17,6 +17,7 @@ class MaterialServiceSignItemFixtures extends Fixture implements FixtureGroupInt
             'Livraison à domicile',
             'Location de véhicule',
             'Location de matériel',
+            'Installation à domicile'
         ];
 
         foreach ($itemsData as $label) {
