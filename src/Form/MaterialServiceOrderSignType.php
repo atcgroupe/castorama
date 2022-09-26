@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\MaterialServiceOrderSign;
 use App\Entity\MaterialServiceSignItem;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -21,6 +22,11 @@ class MaterialServiceOrderSignType extends AbstractType
                 [
                     'label' => 'Premier service',
                     'class' => MaterialServiceSignItem::class,
+                    'query_builder' => function (EntityRepository $er) {
+                        return $er->createQueryBuilder('i')
+                            ->andWhere('i.color = :color')
+                            ->setParameter('color', MaterialServiceSignItem::COLOR_YELLOW);
+                    },
                     'choice_label' => 'label'
                 ]
             )->add(
@@ -29,6 +35,11 @@ class MaterialServiceOrderSignType extends AbstractType
                 [
                     'label' => 'Premier service',
                     'class' => MaterialServiceSignItem::class,
+                    'query_builder' => function (EntityRepository $er) {
+                        return $er->createQueryBuilder('i')
+                            ->andWhere('i.color = :color')
+                            ->setParameter('color', MaterialServiceSignItem::COLOR_BLUE);
+                    },
                     'choice_label' => 'label'
                 ]
             )->add('quantity', NumberType::class, ['label' => 'Quantité'])

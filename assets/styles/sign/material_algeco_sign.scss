@@ -28,11 +28,11 @@
   .text-container {
     position: absolute;
     top: calc(var(--sign-scale) * 76mm);
-    left: calc(var(--sign-scale) * 3mm);
+    left: calc(var(--sign-scale) * 4.2mm);
     font-family: Casto;
     font-weight: 900;
     color: #000000;
-    font-size: calc(var(--sign-scale) * 15.4pt);
-    line-height: calc(var(--sign-scale) * 16pt);
+    font-size: calc(var(--sign-scale) * 12.5pt);
+    line-height: calc(var(--sign-scale) * 12.5pt);
   }
 }
