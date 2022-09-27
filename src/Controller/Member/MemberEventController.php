@@ -13,6 +13,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MemberEventController extends AbstractAppController
 {
+    public function __construct(
+        private readonly int $orderAmountAlertLevel,
+    ) {}
+
     #[Route('/members/{id}/notifications', name: 'member_events')]
     public function setMemberEvents(int $id, Request $request, ManagerRegistry $doctrine): Response
     {
@@ -26,6 +30,13 @@ class MemberEventController extends AbstractAppController
                     $member->addEvent($event) : $member->removeEvent($event);
             }
 
+            if ($request->request->has('amount-alert')) {
+                $member->setAmountAlert(true);
+                $member->setAmountLevel($request->request->get('amount-level'));
+            } else {
+                $member->setAmountAlert(false);
+            }
+
             $manager->flush();
 
             $this->dispatchAlert(Alert::INFO, 'Vos alertes ont été modifiées avec succès');
@@ -37,7 +48,9 @@ class MemberEventController extends AbstractAppController
             'member/events.html.twig',
             [
                 'memberEvents' => $member->getEvents(),
+                'loggedMember' => $member,
                 'events' => $events,
+                'orderAmountAlertLevel' => $this->orderAmountAlertLevel,
             ]
         );
     }

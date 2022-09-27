@@ -18,11 +18,11 @@
         <div class="container">
             <h1 class="text-center">Web2Print ATC Groupe</h1>
 
-            <h2 class="text-center fw-light mt-1">Notification de commande*</h2>
+            <h2 class="text-center fw-light mt-1 text-danger">Alerte*</h2>
 
             <hr class="my-5">
 
-            <h2 class="h4 fw-light text-center">{{ order.status.event.emailMessage }}</h2>
+            <h2 class="h4 fw-light text-center text-danger">Le montant de cette commande<br>à dépasé le seuil que vous avez défini.</h2>
 
             <hr class="mt-5">
 
@@ -86,7 +86,7 @@
             </ul>
 
             <ul class="bg-light">
-                <li>
+                <li class="text-danger">
                     <div>Prix total de la commande</div>
                     <div>{{ resume.totalPrice|format_number({fraction_digit: 2}) }}€</div>
                 </li>
