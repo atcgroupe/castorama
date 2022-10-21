@@ -11,8 +11,14 @@
                     <h4 class="mt-5 mb-3">Personnalisation</h4>
 
                     <div class="mb-4">
+                        {{ form_row(form.aisleNumber) }}
+                    </div>
+
+                    <div class="mb-4">
                         {{ form_row(form.dir) }}
                     </div>
+
+                    <h5 class="mt-5 mb-3">Familles</h5>
 
                     <div class="mb-4">
                         {{ form_row(form.item1) }}
@@ -26,7 +32,7 @@
                         {{ form_row(form.item3) }}
                     </div>
 
-                    <div class="mb-4">
+                    <div class="mb-5">
                         {{ form_row(form.item4) }}
                     </div>
 
@@ -45,6 +51,7 @@
                             'id': 'material-algeco',
                             'scale': 'medium',
                             'dir': 'l',
+                            'aisle_number': '204',
                             'text_line_1': 'Produit 1',
                             'text_line_2': 'Produit 2',
                             'text_line_3': 'Produit 3',
