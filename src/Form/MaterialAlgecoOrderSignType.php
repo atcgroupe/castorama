@@ -18,6 +18,7 @@ class MaterialAlgecoOrderSignType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('aisleNumber', NumberType::class, ['label' => 'N° d\'allée'])
             ->add('quantity', NumberType::class, ['label' => 'Quantité'])
             ->add(
                 'dir',

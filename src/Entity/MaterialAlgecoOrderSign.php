@@ -22,6 +22,11 @@ class MaterialAlgecoOrderSign extends AbstractVariableOrderSign
     public const DIR_RIGHT = 'r';
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $aisleNumber;
+
+    /**
      * @ORM\ManyToOne(targetEntity=MaterialAlgecoSignItem::class)
      * @ORM\JoinColumn(nullable=false)
      */
@@ -50,6 +55,18 @@ class MaterialAlgecoOrderSign extends AbstractVariableOrderSign
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getAisleNumber(): ?int
+    {
+        return $this->aisleNumber;
+    }
+
+    public function setAisleNumber(int $aisleNumber): self
+    {
+        $this->aisleNumber = $aisleNumber;
+
+        return $this;
     }
 
     public function getItem1(): ?MaterialAlgecoSignItem
