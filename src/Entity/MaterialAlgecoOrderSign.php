@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedName;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=MaterialAlgecoOrderSignRepository::class)
@@ -23,6 +24,8 @@ class MaterialAlgecoOrderSign extends AbstractVariableOrderSign
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"api_json_data"})
+     * @Assert\NotBlank(message="Le numéro d'allée est obligatoire")
      */
     private $aisleNumber;
 
@@ -62,7 +65,7 @@ class MaterialAlgecoOrderSign extends AbstractVariableOrderSign
         return $this->aisleNumber;
     }
 
-    public function setAisleNumber(int $aisleNumber): self
+    public function setAisleNumber(?int $aisleNumber): self
     {
         $this->aisleNumber = $aisleNumber;
 
