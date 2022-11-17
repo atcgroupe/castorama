@@ -10,21 +10,26 @@ use Doctrine\Persistence\ObjectManager;
 
 class MaterialServiceSignItemFixtures extends Fixture implements FixtureGroupInterface
 {
+    private const LABEL = 'LABEL';
+    private const COLOR = 'COLOR';
+
     public function load(ObjectManager $manager): void
     {
         $itemsData = [
-            'Avantage carte',
-            'Livraison à domicile',
-            'Location de véhicule',
-            'Location de matériel',
+            [self::LABEL => 'Avantage carte', self::COLOR => MaterialServiceSignItem::COLOR_BLUE],
+            [self::LABEL => 'Livraison à domicile', self::COLOR => MaterialServiceSignItem::COLOR_YELLOW],
+            [self::LABEL => 'Location de véhicule', self::COLOR => MaterialServiceSignItem::COLOR_YELLOW],
+            [self::LABEL => 'Location de matériel', self::COLOR => MaterialServiceSignItem::COLOR_YELLOW],
+            [self::LABEL => 'Installation à domicile', self::COLOR => MaterialServiceSignItem::COLOR_BLUE],
         ];
 
-        foreach ($itemsData as $label) {
-            $item = new MaterialServiceSignItem();
-            $item->setLabel($label);
-            $item->setIsActive(true);
+        foreach ($itemsData as $item) {
+            $signItem = new MaterialServiceSignItem();
+            $signItem->setLabel($item[self::LABEL]);
+            $signItem->setColor($item[self::COLOR]);
+            $signItem->setIsActive(true);
 
-            $manager->persist($item);
+            $manager->persist($signItem);
         }
 
         $manager->flush();

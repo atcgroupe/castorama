@@ -4,7 +4,7 @@
     <div class="row justify-content-md-center">
         <div class="col-lg-6">
             <h1 class="fw-light text-center">Gérer mes alertes email</h1>
-            <p class="text-muted lead text-center mb-4">
+            <p class="text-muted lead text-center mb-4 mt-4">
                 A quel moment souhaitez-vous reçevoir une alerte par email ?
             </p>
 
@@ -25,6 +25,47 @@
 
                     <hr />
                 {% endfor %}
+
+                {% if is_granted('ROLE_COMPANY_ADMIN') or is_granted('ROLE_CUSTOMER_ADMIN') %}
+                    <p class="text-muted lead text-center mb-4 mt-5">
+                        Alertes spéciales
+                    </p>
+
+                    <hr />
+
+                    <div class="form-check form-switch">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="amount-alert"
+                            name="amount-alert"
+                            {% if loggedMember.amountAlert %}checked{% endif %}
+                        >
+                        <label class="form-check-label" for="amount-alert">Alerte montant de commande</label>
+                        <p class="mt-0 text-muted"><small>Alerte envoyée si une commande dépasse le montant défini.</small></p>
+                    </div>
+
+                    <div class="row g-2 align-items-center">
+                        <div class="col-auto">
+                            <label for="amount-level" class="col-form-label">Montant</label>
+                        </div>
+
+                        <div class="col-auto">
+                            <input
+                                type="number"
+                                id="amount-level"
+                                name="amount-level"
+                                class="form-control"
+                                value="{% if loggedMember.amountLevel is not null %}{{ loggedMember.amountLevel }}{% else %}{{ orderAmountAlertLevel }}{% endif %}">
+                        </div>
+
+                        <div class="col-auto">
+                            <span id="passwordHelpInline" class="form-text">€</span>
+                        </div>
+                    </div>
+
+                    <hr />
+                {% endif %}
 
                 <button type="submit" class="btn btn-lg btn-outline-primary w-100 mt-4">
                     Enregistrer les modifications

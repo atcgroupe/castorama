@@ -37,6 +37,20 @@ class OrderSignsResume
         return $this->totalSignsCount;
     }
 
+    /**
+     * @return bool
+     */
+    public function hasMaterialDrillSign(): bool
+    {
+        foreach ($this->getSignsResume() as $resume) {
+            if ($resume->customerReference === '181918') {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private function setTotals(): void
     {
         foreach ($this->getSignsResume() as $resume) {

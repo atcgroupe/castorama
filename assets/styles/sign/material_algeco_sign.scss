@@ -12,10 +12,10 @@
   }
 
   width: calc(var(--sign-scale) * 50mm);
-  height: calc(var(--sign-scale) * 120mm);
+  height: calc(var(--sign-scale) * 137mm);
   position: relative;
   background-repeat: no-repeat;
-  background-size: calc(var(--sign-scale) * 50mm) calc(var(--sign-scale) * 120mm);
+  background-size: calc(var(--sign-scale) * 50mm) calc(var(--sign-scale) * 137mm);
 
   &.dir-l {
     background-image: url("../../images/sign/sign/materialAlgeco/material-algeco-l.svg");
@@ -25,14 +25,24 @@
     background-image: url("../../images/sign/sign/materialAlgeco/material-algeco-r.svg");
   }
 
+  .aisle-number-container {
+    position: absolute;
+    top: calc(var(--sign-scale) * 0mm);
+    left: calc(var(--sign-scale) * 4.5mm);
+    font-family: Casto;
+    font-weight: 900;
+    color: #D9D8D6;
+    font-size: calc(var(--sign-scale) * 35.7pt);
+  }
+
   .text-container {
     position: absolute;
-    top: calc(var(--sign-scale) * 76mm);
-    left: calc(var(--sign-scale) * 3mm);
+    top: calc(var(--sign-scale) * 37.6mm);
+    left: calc(var(--sign-scale) * 4.2mm);
     font-family: Casto;
     font-weight: 900;
     color: #000000;
-    font-size: calc(var(--sign-scale) * 15.4pt);
-    line-height: calc(var(--sign-scale) * 16pt);
+    font-size: calc(var(--sign-scale) * 12.5pt);
+    line-height: calc(var(--sign-scale) * 12.5pt);
   }
 }

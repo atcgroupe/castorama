@@ -17,14 +17,15 @@ class MaterialSectorSignItemCategoryFixtures extends Fixture implements FixtureG
             2 => 'cloison et plafond',
             3 => 'clôture',
             4 => 'entretien jardin',
-            5 => 'evacuation',
+            5 => 'évacuation',
             6 => 'isolation',
             7 => 'matériau',
             8 => 'matériel',
             9 => 'portail',
             10 => 'poudre',
-            11 => 'sol exterieur',
+            11 => 'sol extérieur',
             12 => 'toiture',
+            13 => 'jardin extérieur'
         ];
 
         foreach ($categories as $key => $label) {

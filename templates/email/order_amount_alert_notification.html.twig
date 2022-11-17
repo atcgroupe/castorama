@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns:v="urn:schemas-microsoft-com:vml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap" rel="stylesheet">
+
+        {{ include('email/_notification_style.html.twig') }}
+
+        <title>ATC Groupe Web2Print notification</title>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1 class="text-center">Web2Print ATC Groupe</h1>
+
+            <h2 class="text-center fw-light mt-1 text-danger">Alerte*</h2>
+
+            <hr class="my-5">
+
+            <h2 class="h4 fw-light text-center text-danger">Le montant de cette commande<br>à dépasé le seuil que vous avez défini.</h2>
+
+            <hr class="mt-5">
+
+            <p class="text-muted fw-normal mb-5 text-small">
+                * Merci de ne pas répondre à ce mail. Celui-ci est utilisée uniquement pour envoyer des message.
+            </p>
+
+            <h2 class="h3 fw-light mb-3">Récapitulatif de la commande</h2>
+
+            <ul class="mb-3 bg-light">
+                <li>
+                    <div>Référence commande</div>
+                    <div>{{ order.id }}</div>
+                </li>
+
+                <li>
+                    <div>Référence DataMerch</div>
+                    <div>{{ order.customerReference }}</div>
+                </li>
+
+                <li>
+                    <div>Magasin</div>
+                    <div>{{ order.user.userIdentifier }}</div>
+                </li>
+
+                <li>
+                    <div>Créée par</div>
+                    <div>{{ order.member.displayName }}</div>
+                </li>
+            </ul>
+
+            <ul class="bg-light mb-3">
+                <li>
+                    <div>Statut de la commande</div>
+                    <div>
+                        {{ order.status.label }}<br>
+                        <span class="text-muted text-small">{{ order.status.event.help }}</span>
+                    </div>
+                </li>
+
+                <li>
+                    <div>Date de livraison estimée</div>
+                    <div>{{ order.deliveryDate|date('d/m/Y') }}</div>
+                </li>
+
+                <li>
+                    <div>Adresse de livraison</div>
+                    <div>
+                        {{ order.user.shop.address }}<br>
+                        {{ order.user.shop.postCode }} {{ order.user.shop.city }}<br>
+                        <span class="text-muted text-small">{{ order.user.shop.region }}</span>
+                    </div>
+                </li>
+
+                {% if order.comment %}
+                    <li>
+                        <div>Commentaire</div>
+                        <div>{{ order.comment }}</div>
+                    </li>
+                {% endif %}
+            </ul>
+
+            <ul class="bg-light">
+                <li class="text-danger">
+                    <div>Prix total de la commande</div>
+                    <div>{{ resume.totalPrice|format_number({fraction_digit: 2}) }}€</div>
+                </li>
+
+                <li>
+                    <div>Nombre total de panneaux</div>
+                    <div>{{ resume.totalSignsCount }} Exemplaires</div>
+                </li>
+            </ul>
+
+            <h2 class="h4 fw-light mt-4 mb-3">Détail des éléments</h2>
+
+            <ul class="bg-light mb-5">
+                {% for signResume in resume.signsResume %}
+                    <li>
+                        <div>{{ signResume.title }}</div>
+
+                        <div>
+                            {% if not signResume.isCustom %}
+                                {{ signResume.modelsCount }}
+                                {% if signResume.modelsCount > 1 %}Modèles différents{% else %}Modèle{% endif %}<br/>
+                            {% endif %}
+                            {{ signResume.signsCount }} Exemplaire{% if signResume.signsCount > 1 %}s
+                            {% if not signResume.isCustom %}au total{% endif %}{% endif %}<br/>
+                            {{ signResume.totalPrice|format_number({fraction_digit: 2}) }}€
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </body>
+</html>

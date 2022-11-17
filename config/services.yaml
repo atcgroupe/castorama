@@ -58,3 +58,15 @@ services:
     App\Service\Sign\CustomSignFileManager:
       arguments:
           $projectDir: '%kernel.project_dir%'
+
+    App\Service\Order\OrderNotificationDispatcher:
+      arguments:
+        $emailNotifications: '%env(EMAIL_NOTIFICATIONS)%'
+
+    App\Service\Notification\EmailNotificationDispatcher:
+      arguments:
+        $emailNotifications: '%env(EMAIL_NOTIFICATIONS)%'
+
+    App\Controller\Member\MemberEventController:
+      arguments:
+        $orderAmountAlertLevel: '%env(ORDER_AMOUNT_ALERT_LEVEL)%'

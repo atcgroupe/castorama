@@ -1,0 +1,21 @@
+FROM php:8.1-fpm
+
+COPY ./php.ini-prod  ${PHP_INI_DIR}/php.ini
+
+WORKDIR /app
+
+COPY ./composer.json .
+
+RUN curl -sS "https://getcomposer.org/installer" | php -- --install-dir=/usr/bin --filename=composer && \
+    curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | bash && \
+    apt update && apt install -y zip libzip-dev git libicu-dev symfony-cli locales && \
+    echo "fr_FR.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen && \
+    docker-php-ext-install opcache intl pdo_mysql zip && \
+    composer install --no-dev --optimize-autoloader
+
+COPY . .
+
+RUN mkdir /app/public/resource && \
+    usermod -aG root www-data && \
+    chown -R www-data:root /app && \
+    symfony console cache:clear

@@ -63,6 +63,16 @@ class Member
      */
     private $events;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $amountAlert;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $amountLevel;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
@@ -175,6 +185,30 @@ class Member
     public function removeEvent(Event $event): self
     {
         $this->events->removeElement($event);
+
+        return $this;
+    }
+
+    public function getAmountAlert(): ?bool
+    {
+        return $this->amountAlert;
+    }
+
+    public function setAmountAlert(bool $amountAlert): self
+    {
+        $this->amountAlert = $amountAlert;
+
+        return $this;
+    }
+
+    public function getAmountLevel(): ?int
+    {
+        return $this->amountLevel;
+    }
+
+    public function setAmountLevel(?int $amountLevel): self
+    {
+        $this->amountLevel = $amountLevel;
 
         return $this;
     }
