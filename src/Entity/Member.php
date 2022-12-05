@@ -77,6 +77,7 @@ class Member
     {
         $this->orders = new ArrayCollection();
         $this->events = new ArrayCollection();
+        $this->setDefaults();
     }
 
     public function getId(): ?int
@@ -211,5 +212,10 @@ class Member
         $this->amountLevel = $amountLevel;
 
         return $this;
+    }
+
+    private function setDefaults(): void
+    {
+        $this->setAmountAlert(false);
     }
 }
