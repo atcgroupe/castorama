@@ -25,7 +25,9 @@ class MaterialSectorSignItemCategoryFixtures extends Fixture implements FixtureG
             10 => 'poudre',
             11 => 'sol extérieur',
             12 => 'toiture',
-            13 => 'jardin extérieur'
+            13 => 'jardin extérieur',
+            14 => 'entretien du jardin',
+            15 => 'jardin d\'agrément',
         ];
 
         foreach ($categories as $key => $label) {
