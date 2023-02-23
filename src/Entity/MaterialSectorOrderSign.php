@@ -12,7 +12,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=MaterialSectorOrderSignRepository::class)
- * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity(
  *     fields={"order", "aisleNumber", "alignment"},
  *     errorPath="aisleNumber",
@@ -40,24 +39,9 @@ class MaterialSectorOrderSign extends AbstractVariableOrderSign
     /**
      * @ORM\ManyToOne(targetEntity=MaterialSectorSignItem::class)
      * @ORM\JoinColumn(nullable=false)
-     * @Assert\NotBlank(message="Vous devez sélectionner au moins un produit.")
+     * @Assert\NotBlank(message="Vous devez sélectionner un secteur")
      */
-    private $item1;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=MaterialSectorSignItem::class)
-     */
-    private $item2;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=MaterialSectorSignItem::class)
-     */
-    private $item3;
-
-    /**
-     * @Assert\NotBlank(message="Vous devez sélectionner la catégorie.")
-     */
-    private $category;
+    private $sector;
 
     public function getAisleNumber(): ?int
     {
@@ -88,64 +72,16 @@ class MaterialSectorOrderSign extends AbstractVariableOrderSign
         return $this;
     }
 
-    public function getItem1(): ?MaterialSectorSignItem
+    public function getSector(): ?MaterialSectorSignItem
     {
-        return $this->item1;
+        return $this->sector;
     }
 
-    public function setItem1(?MaterialSectorSignItem $item1): self
+    public function setSector(?MaterialSectorSignItem $sector): self
     {
-        $this->item1 = $item1;
+        $this->sector = $sector;
 
         return $this;
-    }
-
-    public function getItem2(): ?MaterialSectorSignItem
-    {
-        return $this->item2;
-    }
-
-    public function setItem2(?MaterialSectorSignItem $item2): self
-    {
-        $this->item2 = $item2;
-
-        return $this;
-    }
-
-    public function getItem3(): ?MaterialSectorSignItem
-    {
-        return $this->item3;
-    }
-
-    public function setItem3(?MaterialSectorSignItem $item3): self
-    {
-        $this->item3 = $item3;
-
-        return $this;
-    }
-
-    /**
-     * @ORM\PostLoad()
-     */
-    public function initializeCategory()
-    {
-        $this->setCategory(($this->getItem1() !== null) ? $this->getItem1()->getCategory() : null);
-    }
-
-    /**
-     * @return MaterialSectorSignItemCategory|null
-     */
-    public function getCategory(): ?MaterialSectorSignItemCategory
-    {
-        return $this->category;
-    }
-
-    /**
-     * @param MaterialSectorSignItemCategory|null $category
-     */
-    public function setCategory(?MaterialSectorSignItemCategory $category): void
-    {
-        $this->category = $category;
     }
 
     /**
@@ -163,37 +99,26 @@ class MaterialSectorOrderSign extends AbstractVariableOrderSign
      */
     public function getSectorLabel(): string
     {
-        return (null === $this->getCategory()) ? '' : $this->getCategory()->getLabel();
+        return $this->getSector()->getLabel();
     }
 
     /**
-     * @return string
+     * @return bool
      * @Groups({"api_json_data"})
-     * @SerializedName("item1Label")
+     * @SerializedName("isSectorLabelStrech")
      */
-    public function getItem1Label(): string
+    public function isSectorLabelStretch(): bool
     {
-        return (null === $this->getItem1()) ? '' : $this->getItem1()->getLabel();
-    }
+        $words = explode(" ", $this->getSectorLabel());
+        $isStretch = false;
 
-    /**
-     * @return string
-     * @Groups({"api_json_data"})
-     * @SerializedName("item2Label")
-     */
-    public function getItem2Label(): string
-    {
-        return (null === $this->getItem2()) ? '' : $this->getItem2()->getLabel();
-    }
+        foreach ($words as $word) {
+            if ($word > 13) {
+                $isStretch = true;
+            }
+        }
 
-    /**
-     * @return string
-     * @Groups({"api_json_data"})
-     * @SerializedName("item3Label")
-     */
-    public function getItem3Label(): string
-    {
-        return (null === $this->getItem3()) ? '' : $this->getItem3()->getLabel();
+        return $isStretch;
     }
 
     private function getAlignmentLabel(): string

@@ -19,19 +19,7 @@
                 </div>
 
                 <div class="mb-4">
-                    {{ form_row(form.category) }}
-                </div>
-
-                <div class="mb-4">
-                    {{ form_row(form.item1) }}
-                </div>
-
-                <div id="aisle-item2-container" class="item-container mb-4">
-                    {{ form_row(form.item2) }}
-                </div>
-
-                <div id="aisle-item3-container" class="item-container mb-4">
-                    {{ form_row(form.item3) }}
+                    {{ form_row(form.sector) }}
                 </div>
 
                 <div class="mb-4">
@@ -52,9 +40,7 @@
                             'alignment': 'right',
                             'number': '499',
                             'sector': 'Secteur',
-                            'product_item_1': 'BÉTONNIÈRE',
-                            'product_item_2': 'CARREAU DE PLÂTRE',
-                            'product_item_3': 'DALLE DE PLANCHER'
+                            'isStretch': false
                         }
                     %}
 
@@ -65,10 +51,8 @@
                             'alignment': 'right',
                             'number': '499',
                             'sector': 'Secteur',
-                            'product_item_1': 'BÉTONNIÈRE',
-                            'product_item_2': 'CARREAU DE PLÂTRE',
-                            'product_item_3': 'DALLE DE PLANCHER',
-                            'class': 'mt-4'
+                            'class': 'mt-4',
+                            'isStretch': false
                         }
                     %}
                 </div>

@@ -1,8 +1,8 @@
 version: "3.8"
 
 services:
-  mysql:
-    image: mysql:8.0.30
+  db:
+    image: mysql
     ports:
       - "8889:3306"
     environment:
@@ -11,6 +11,20 @@ services:
       - type: volume
         source: dbdev
         target: /var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOST: db
+      MPA_PORT: 3306
+    links:
+      - db
+    depends_on:
+      - db
 
 volumes:
   dbdev:
