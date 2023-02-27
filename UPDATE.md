@@ -41,4 +41,4 @@ Pull new repository version
 1. Make database migrations
 2. Empty material_sector_order_sign table
 3. Empty material_sector_sign_item table
-
+4. Remove App\Entity\MaterialServiceOrderSign entry from sign table
