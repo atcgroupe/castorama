@@ -105,7 +105,6 @@ class MaterialSectorOrderSign extends AbstractVariableOrderSign
     /**
      * @return bool
      * @Groups({"api_json_data"})
-     * @SerializedName("isSectorLabelStrech")
      */
     public function isSectorLabelStretch(): bool
     {
@@ -119,6 +118,16 @@ class MaterialSectorOrderSign extends AbstractVariableOrderSign
         }
 
         return $isStretch;
+    }
+
+    /**
+     * @return string
+     * @Groups({"api_json_data"})
+     * @SerializedName("productTextClass")
+     */
+    public function getProductTextClass(): string
+    {
+        return ($this->isSectorLabelStretch()) ? 'stretch' : 'normal';
     }
 
     private function getAlignmentLabel(): string
