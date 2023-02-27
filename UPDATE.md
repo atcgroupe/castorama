@@ -31,3 +31,14 @@ symfony console doctrine:fixtures:load --append --group=v2
 
 ### Add products on the platform
 Add the fixed signs directly in the production platform.
+
+# UPDATE V3: 02-2023
+
+## First step: repository
+Pull new repository version
+
+## Second step: database
+1. Make database migrations
+2. Empty material_sector_order_sign table
+3. Empty material_sector_sign_item table
+4. Remove App\Entity\MaterialServiceOrderSign entry from sign table

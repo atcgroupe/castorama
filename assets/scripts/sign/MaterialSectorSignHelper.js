@@ -1,197 +1,139 @@
-import {FormHelper} from "../app/form_helper";
+import { FormHelper } from "../app/form_helper";
 
 export class MaterialSectorSignHelper {
-    constructor(formName) {
-        this.formName = formName;
-        this.maxAisleNumber = 999;
+  constructor(formName) {
+    this.formName = formName;
+    this.maxAisleNumber = 999;
 
-        this.previewOne = document.getElementById('material-sector-sign-1');
-        this.previewTwo = document.getElementById('material-sector-sign-2');
-        this.previewsSector = document.getElementsByClassName(`sector-value`);
-        this.previewsAisleNumber = document.getElementsByClassName('aisle-number-value');
+    this.previewOne = document.getElementById("material-sector-sign-1");
+    this.previewTwo = document.getElementById("material-sector-sign-2");
+    this.previewsSector = document.getElementsByClassName(`sector-value`);
+    this.previewsAisleNumber =
+      document.getElementsByClassName("aisle-number-value");
 
-        this.aisleNumberInput = document.getElementById(`${formName}_aisleNumber`);
-        this.alignmentSelect = document.getElementById(`${formName}_alignment`);
-        this.itemsCategorySelect = document.getElementById(`${formName}_category`);
-        this.itemsText = document.getElementsByClassName('product-items');
-        this.itemsSelects = document.getElementsByClassName('item_select');
+    this.aisleNumberInput = document.getElementById(`${formName}_aisleNumber`);
+    this.alignmentSelect = document.getElementById(`${formName}_alignment`);
+    this.itemsSectorSelect = document.getElementById(`${formName}_sector`);
+    this.itemsSelects = document.getElementsByClassName("item_select");
 
-        this.refreshSignPreview();
-        this.addAisleNumberListener();
-        this.addAlignmentListener();
-        this.addCategoryListener();
-        this.addItemsSelectsListeners();
-    };
+    this.refreshSignPreview();
+    this.addAisleNumberListener();
+    this.addAlignmentListener();
+    this.addSectorListener();
+  }
 
-    setPreviewNumber() {
-        if (this.aisleNumberInput.value >= this.maxAisleNumber) {
-            this.aisleNumberInput.value = this.maxAisleNumber;
-        }
-
-        Array.from(this.previewsAisleNumber).forEach((item) => {
-            item.innerText = this.aisleNumberInput.value;
-        })
-    };
-
-    setPreviewAlignment() {
-        const alignment = this.alignmentSelect.value;
-
-        if (alignment === 'all') {
-            this.previewOne.classList.remove('right');
-            this.previewOne.classList.add('left');
-            this.previewTwo.classList.remove('left');
-            this.previewTwo.classList.add('right');
-            return;
-        }
-
-        if (alignment === 'left') {
-            this.previewOne.classList.remove('right');
-            this.previewOne.classList.add('left');
-            return;
-        }
-
-        if (alignment === 'right') {
-            this.previewOne.classList.remove('left');
-            this.previewOne.classList.add('right');
-        }
+  setPreviewNumber() {
+    if (this.aisleNumberInput.value >= this.maxAisleNumber) {
+      this.aisleNumberInput.value = this.maxAisleNumber;
     }
 
-    setPreviewsScale() {
-        if (this.alignmentSelect.value === 'all') {
-            this.previewOne.classList.remove('large');
-            this.previewOne.classList.add('medium');
-            return;
-        }
+    Array.from(this.previewsAisleNumber).forEach((item) => {
+      item.innerText = this.aisleNumberInput.value;
+    });
+  }
 
-        this.previewOne.classList.remove('medium');
-        this.previewOne.classList.add('large');
+  setPreviewAlignment() {
+    const alignment = this.alignmentSelect.value;
+
+    if (alignment === "all") {
+      this.previewOne.classList.remove("right");
+      this.previewOne.classList.add("left");
+      this.previewTwo.classList.remove("left");
+      this.previewTwo.classList.add("right");
+      return;
     }
 
-    setPreviewsVisibility() {
-        if (this.alignmentSelect.value === 'all') {
-            this.previewTwo.classList.remove('d-none');
-            return;
-        }
-
-        this.previewTwo.classList.add('d-none');
+    if (alignment === "left") {
+      this.previewOne.classList.remove("right");
+      this.previewOne.classList.add("left");
+      return;
     }
 
-    setPreviewSector() {
-        Array.from(this.previewsSector).forEach(sector => {
-            if (this.itemsCategorySelect.value === undefined) {
-                sector.innerText = '';
+    if (alignment === "right") {
+      this.previewOne.classList.remove("left");
+      this.previewOne.classList.add("right");
+    }
+  }
 
-                return;
-            }
-
-            const categoryValue = this.itemsCategorySelect.options[this.itemsCategorySelect.selectedIndex].text
-            sector.innerText = categoryValue;
-
-            if (categoryValue.length > 15) {
-                sector.classList.add('stretch');
-                sector.classList.remove('normal');
-                return;
-            }
-
-            sector.classList.add('normal');
-            sector.classList.remove('stretch');
-        });
+  setPreviewsScale() {
+    if (this.alignmentSelect.value === "all") {
+      this.previewOne.classList.remove("large");
+      this.previewOne.classList.add("medium");
+      return;
     }
 
-    setPreviewText() {
-        let text = '';
-        let i = 0;
+    this.previewOne.classList.remove("medium");
+    this.previewOne.classList.add("large");
+  }
 
-        Array.from(this.itemsSelects).forEach((select) => {
-            let option = select.options[select.selectedIndex];
-            if (!this.isOptionEmpty(select)) {
-                if (i > 0) text += '<br />';
-                text += option.text;
-            }
-            i++;
-        })
-
-        Array.from(this.itemsText).forEach((label) => label.innerHTML = text);
+  setPreviewsVisibility() {
+    if (this.alignmentSelect.value === "all") {
+      this.previewTwo.classList.remove("d-none");
+      return;
     }
 
-    isOptionEmpty(dataSelect) {
-        const option = dataSelect.options[dataSelect.selectedIndex];
+    this.previewTwo.classList.add("d-none");
+  }
 
-        return typeof option === 'undefined' || option.text === '';
-    }
+  setPreviewSector() {
+    Array.from(this.previewsSector).forEach((sector) => {
+      if (!this.itemsSectorSelect.value) {
+        sector.innerText = "";
 
-    resetItemSelect(item) {
-        item.setAttribute('disabled', 'disabled');
-        item.value = '';
-        item.text = '';
-    }
+        return;
+      }
 
-    enableElement(element) {
-        element.removeAttribute('disabled');
-    }
+      const sectorValue =
+        this.itemsSectorSelect.options[this.itemsSectorSelect.selectedIndex]
+          .text;
+      sector.innerText = sectorValue;
 
-    setItemsStatus() {
-        for (let i = 1; i < 3; i++) {
-            const dataItem = document.getElementById(`${this.formName}_item${i}`);
-            const targetItem = document.getElementById(`${this.formName}_item${i + 1}`);
+      if (sectorValue.split(" ").some((elem) => elem.length > 13)) {
+        sector.classList.add("stretch");
+        sector.classList.remove("normal");
+        return;
+      }
 
-            if (this.isOptionEmpty(dataItem)) {
-                this.resetItemSelect(targetItem);
-            } else {
-                this.enableElement(targetItem)
-            }
-        }
-    }
+      sector.classList.add("normal");
+      sector.classList.remove("stretch");
+    });
+  }
 
-    refreshSignPreview() {
-        this.setPreviewsVisibility();
-        this.setPreviewsScale();
-        this.setPreviewNumber();
-        this.setPreviewAlignment();
-        this.setPreviewSector();
-        this.setItemsStatus();
-        this.setPreviewText();
-    }
+  isOptionEmpty(dataSelect) {
+    const option = dataSelect.options[dataSelect.selectedIndex];
 
-    setSelectItemsFromCategory() {
-        const self = this;
-        const value = this.itemsCategorySelect.value;
-        const route = this.itemsCategorySelect.dataset.route;
-        const form = new FormData();
-        form.append('category', value);
+    return typeof option === "undefined" || option.text === "";
+  }
 
-        fetch(route, {
-            method: 'POST',
-            body: form
-        }).then(function (response){
-            return response.json();
-        }).then(function (data) {
-            Array.from(self.itemsSelects).forEach((itemSelect) => {
-                FormHelper.setSelectOptions(itemSelect, data);
-            })
-            self.refreshSignPreview();
-        });
-    }
+  enableElement(element) {
+    element.removeAttribute("disabled");
+  }
 
-    addAisleNumberListener() {
-        this.aisleNumberInput.addEventListener('change', () => this.setPreviewNumber());
-    }
+  refreshSignPreview() {
+    this.setPreviewsVisibility();
+    this.setPreviewsScale();
+    this.setPreviewNumber();
+    this.setPreviewAlignment();
+    this.setPreviewSector();
+  }
 
-    addAlignmentListener() {
-        this.alignmentSelect.addEventListener('change', () => {
-            this.setPreviewsVisibility();
-            this.setPreviewsScale();
-            this.setPreviewAlignment()
-        });
-    }
+  addAisleNumberListener() {
+    this.aisleNumberInput.addEventListener("change", () =>
+      this.setPreviewNumber()
+    );
+  }
 
-    addCategoryListener() {
-        this.itemsCategorySelect.addEventListener('change', () => this.setSelectItemsFromCategory());
-    }
+  addAlignmentListener() {
+    this.alignmentSelect.addEventListener("change", () => {
+      this.setPreviewsVisibility();
+      this.setPreviewsScale();
+      this.setPreviewAlignment();
+    });
+  }
 
-    addItemsSelectsListeners() {
-        Array.from(this.itemsSelects).forEach((itemSelect) => {
-            itemSelect.addEventListener('change', () => this.refreshSignPreview());
-        });
-    }
+  addSectorListener() {
+    this.itemsSectorSelect.addEventListener("change", () =>
+      this.setPreviewSector()
+    );
+  }
 }

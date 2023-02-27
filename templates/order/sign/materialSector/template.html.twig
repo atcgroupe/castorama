@@ -6,20 +6,8 @@
     </div>
 
     <div class="sector-container">
-        <div class="sector-value {% if sector|length > 15 %}stretch{% else %}normal{% endif %}">
+        <div class="sector-value {% if isStretch %}stretch{% else %}normal{% endif %}">
             {{ sector }}
-        </div>
-    </div>
-
-    <div class="products-container">
-        <div class="product-items">
-            {{ product_item_1 }}
-            {% if product_item_2 != '' %}
-                <br />{{ product_item_2 }}
-            {% endif %}
-            {% if product_item_3 != '' %}
-                <br />{{ product_item_3 }}
-            {% endif %}
         </div>
     </div>
 </div>

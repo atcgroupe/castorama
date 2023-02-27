@@ -23,12 +23,8 @@ class MaterialSectorOrderSignRepository extends ServiceEntityRepository implemen
     public function findByOrderWithRelations(Order $order): array
     {
         return $this->createQueryBuilder('m')
-            ->innerJoin('m.item1', 'item1')
-                ->addSelect('item1')
-            ->leftJoin('m.item2', 'item2')
-                ->addSelect('item2')
-            ->leftJoin('m.item3', 'item3')
-                ->addSelect('item3')
+            ->innerJoin('m.sector', 'sector')
+                ->addSelect('sector')
             ->andWhere('m.order = :order')
                 ->setParameter('order', $order)
             ->orderBy('m.aisleNumber', 'ASC')
