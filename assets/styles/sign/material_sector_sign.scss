@@ -38,7 +38,7 @@
     }
 
     .products-container {
-      justify-content: start;
+      justify-content: flex-start;
     }
   }
 
@@ -54,7 +54,7 @@
     }
 
     .products-container {
-      justify-content: end;
+      justify-content: flex-end;
       text-align: end;
     }
   }
@@ -78,11 +78,11 @@
     width: calc(var(--sign-scale) * 85mm);
     height: calc(var(--sign-scale) * 70mm);
     display: flex;
-    justify-content: flex-start;
     align-items: center;
 
     .sector-value {
       color: #000000;
+      width: calc(var(--sign-scale) * 85mm);
 
       &.normal {
         font-size: calc(var(--sign-scale) * 35pt);
