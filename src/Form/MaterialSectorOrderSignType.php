@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\MaterialSectorOrderSign;
 use App\Entity\MaterialSectorSignItem;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -26,10 +27,14 @@ class MaterialSectorOrderSignType extends AbstractType
             ->add('quantity', NumberType::class, ['label' => 'Quantité'])
             ->add('sector', EntityType::class,
               [
-                'label' => 'Secteur',
-                'class' => MaterialSectorSignItem::class,
-                'choice_label' => 'label',
-                'placeholder' => 'Choisissez un secteur',
+                  'label' => 'Secteur',
+                  'class' => MaterialSectorSignItem::class,
+                  'choice_label' => 'label',
+                  'query_builder' => function (EntityRepository $er) {
+                      return $er->createQueryBuilder('i')
+                          ->orderBy('i.label', 'ASC');
+                  },
+                  'placeholder' => 'Choisissez un secteur',
               ]
             )
             ->add(
