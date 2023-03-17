@@ -28,14 +28,16 @@ class OrderSignsDataHelper
         $zip = new ZipArchive();
         $file = tempnam(sys_get_temp_dir(), 'order_xml_zip');
         $zip->open($file, ZipArchive::CREATE);
+        $count = 0;
 
         foreach ($signs as $sign) {
+            $count ++;
             if ($sign instanceof AbstractVariableOrderSign) {
                 $sign->setData($this->serializer->serialize($sign, 'json', ['groups' => 'api_json_data']));
             }
 
             $zip->addFromString(
-                $sign->getXmlFilename(),
+                $count . ' - ' . $sign->getXmlFilename(),
                 $this->serializer->serialize(
                     $sign,
                     'xml',
