@@ -89,7 +89,9 @@ class MaterialSectorOrderSign extends AbstractVariableOrderSign
      */
     public function getXmlFilename(): string
     {
-        return $this->getFormattedXmlFilename($this->getAisleNumber() . ' ' . $this->getAlignmentLabel());
+        return $this->getFormattedXmlFilename(
+            $this->getAisleNumber() . ' ' . $this->getAlignmentLabel() . ' ID' . $this->getId()
+        );
     }
 
     /**
